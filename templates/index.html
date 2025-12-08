@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>MMU Timetable Checker</title>
+</head>
+<body>
+    <div class="page-wrapper">
+    <h1>TIMETABLE ORGANIZER</h1>
+    <form method="POST" id="subjects-form">
+        {% set form_data = form_data or {} %}
+        {% set max_subjects = max_subjects or 10 %}
+        {% set initial_visible = initial_visible or 3 %}
+        {% for i in range(1, max_subjects + 1) %}
+        {% set has_value = form_data.get('subject' ~ i) or form_data.get('type' ~ i) or form_data.get('day' ~ i) or form_data.get('start' ~ i) or form_data.get('end' ~ i) %}
+        <fieldset class="subject-fieldset {% if not has_value and i > initial_visible %}is-hidden{% endif %}" data-index="{{ i }}">
+            <legend>Subject {{i}}</legend>
+            <button type="button" class="remove-btn" data-index="{{ i }}" title="Remove this subject">&#128465;</button>
+            <label>Subject Name:
+                <input type="text" name="subject{{i}}" value="{{ form_data.get('subject' ~ i, '') }}">
+            </label>
+            <label>Type: 
+                <select name="type{{i}}">
+                    <option value="Lecture" {% if form_data.get('type' ~ i) == 'Lecture' %}selected{% endif %}>Lecture</option>
+                    <option value="Tutorial" {% if form_data.get('type' ~ i) == 'Tutorial' %}selected{% endif %}>Tutorial</option>
+                </select>
+            </label>
+            <label>Day: 
+                <select name="day{{i}}">
+                    <option value="Monday" {% if form_data.get('day' ~ i) == 'Monday' %}selected{% endif %}>Monday</option>
+                    <option value="Tuesday" {% if form_data.get('day' ~ i) == 'Tuesday' %}selected{% endif %}>Tuesday</option>
+                    <option value="Wednesday" {% if form_data.get('day' ~ i) == 'Wednesday' %}selected{% endif %}>Wednesday</option>
+                    <option value="Thursday" {% if form_data.get('day' ~ i) == 'Thursday' %}selected{% endif %}>Thursday</option>
+                    <option value="Friday" {% if form_data.get('day' ~ i) == 'Friday' %}selected{% endif %}>Friday</option>
+                </select>
+            </label>
+
+            <div class="time-row">
+                <label>Start Time:
+                    <select name="start{{i}}">
+                        {% for hour in range(6, 12) %}
+                            {% set option = "%02d:00 AM"|format(hour) %}
+                            <option value="{{ option }}" {% if form_data.get('start' ~ i) == option %}selected{% endif %}>{{ "%02d:00AM"|format(hour) }}</option>
+                        {% endfor %}
+
+                        {% set noon = "12:00PM" %}
+                        <option value="12:00PM" {% if form_data.get('start' ~ i) == noon %}selected{% endif %}>12:00PM</option>
+
+                        {% for hour in range(1,9) %}
+                            {% set option = "%02d:00 PM"|format(hour) %}
+                            <option value="{{ option }}" {% if form_data.get('start' ~ i) == option %}selected{% endif %}>{{ "%02d:00PM"|format(hour) }}</option>
+                        {% endfor %}
+                    </select>
+                </label>
+
+                <label>End Time:
+                    <select name="end{{i}}">
+                        {% for hour in range(6, 12) %}
+                            {% set option = "%02d:00 AM"|format(hour) %}
+                            <option value="{{ option }}" {% if form_data.get('end' ~ i) == option %}selected{% endif %}>{{ "%02d:00AM"|format(hour) }}</option>
+                        {% endfor %}
+
+                        {% set noon = "12:00PM" %}
+                        <option value="12:00PM" {% if form_data.get('end' ~ i) == noon %}selected{% endif %}>12:00PM</option>
+
+                        {% for hour in range(1,9) %}
+                            {% set option = "%02d:00 PM"|format(hour) %}
+                            <option value="{{ option }}" {% if form_data.get('end' ~ i) == option %}selected{% endif %}>{{ "%02d:00PM"|format(hour) }}</option>
+                        {% endfor %}
+                    </select>
+                </label>
+            </div>
+
+        </fieldset>
+        <hr class="{% if not has_value and i > initial_visible %}is-hidden{% endif %}">
+        {% endfor %}
+        <button type="button" id="add-subject-btn" class="secondary-btn">ADD SUBJECT</button>
+        <input type="submit" value="CHECK TIMETABLE">
+    </form>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const addBtn = document.getElementById("add-subject-btn");
+            const removeButtons = Array.from(document.querySelectorAll(".remove-btn"));
+            const fieldsets = Array.from(document.querySelectorAll(".subject-fieldset"));
+
+            const updateButtonState = () => {
+                const hiddenExists = fieldsets.some(fs => fs.classList.contains("is-hidden"));
+                if (!hiddenExists) {
+                    addBtn.disabled = true;
+                    addBtn.textContent = "All subjects added";
+                } else {
+                    addBtn.disabled = false;
+                    addBtn.textContent = "ADD SUBJECT";
+                }
+            };
+
+            const hideFieldset = (fieldset) => {
+                fieldset.classList.add("is-hidden");
+                const divider = fieldset.nextElementSibling;
+                if (divider && divider.tagName === "HR") {
+                    divider.classList.add("is-hidden");
+                }
+            };
+
+            addBtn.addEventListener("click", () => {
+                const nextHidden = fieldsets.find(fs => fs.classList.contains("is-hidden"));
+                if (nextHidden) {
+                    nextHidden.classList.remove("is-hidden");
+                    const divider = nextHidden.nextElementSibling;
+                    if (divider && divider.tagName === "HR") {
+                        divider.classList.remove("is-hidden");
+                    }
+                    nextHidden.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+                updateButtonState();
+            });
+
+            removeButtons.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const fieldset = btn.closest(".subject-fieldset");
+                    fieldset.querySelectorAll("input, select").forEach(el => {
+                        if (el.tagName === "SELECT") {
+                            el.selectedIndex = 0;
+                        } else {
+                            el.value = "";
+                        }
+                    });
+                    hideFieldset(fieldset);
+                    updateButtonState();
+                });
+            });
+
+            updateButtonState();
+        });
+    </script>
+</body>
+</html>

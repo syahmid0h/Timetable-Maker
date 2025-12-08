@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Your Timetable</title>
+</head>
+<body class="result-page">
+    <div class="page-wrapper">
+        <h1>YOUR TIMETABLE</h1>
+
+        <div class="timetable-wrapper">
+            <table class="timetable-table">
+                <thead>
+                    <tr>
+                        <th class="time-col">Time</th>
+                        {% for day in days %}
+                            <th>{{ day }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for hour in hours %}
+                    <tr>
+                        <td class="time-label">
+                            {{ "%02d:00"|format(hour) }} - {{ "%02d:00"|format(hour + 1) }}
+                        </td>
+                        {% for day in days %}
+                        <td class="timetable-cell">
+                            {% for slot in grid[hour][day] %}
+                            {% if slot.start_hour == hour %}
+                            <div class="timetable-slot timetable-slot-{{ slot.type|lower }}" data-span="{{ slot.span_hours }}">
+                                <div class="slot-subject">{{ slot.subject }}</div>
+                                <div class="slot-meta">
+                                    {{ slot.type }}<br>
+                                    <span class="slot-time">{{ slot.start }} - {{ slot.end }}</span>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {% if conflicts %}
+        <div class="conflicts-block has-conflicts">
+            <h2>Conflicts detected</h2>
+            <ul>
+                {% for a, b in conflicts %}
+                <li>
+                    <strong>{{ a.subject }} ({{ a.type }})</strong>
+                    conflicts with
+                    <strong>{{ b.subject }} ({{ b.type }})</strong>
+                    on {{ a.day }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% else %}
+        <div class="conflicts-block no-conflicts">
+            <h2>No conflicts detected 🎉</h2>
+        </div>
+        {% endif %}
+
+        <div class="actions-row">
+            <a class="back-link" href="/">← Back to form</a>
+        </div>
+    </div>
+</body>
+</html>

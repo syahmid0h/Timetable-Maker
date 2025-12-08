@@ -1,0 +1,343 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+body {
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, sans-serif;
+    margin: 0;
+    background: #c3b091;
+    color: #000000;
+}
+
+.page-wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+    text-align: center;
+}
+
+h1 {
+    font-family: 'VT323';
+    text-align: center;
+    letter-spacing: 5px;
+    margin-bottom: 2rem;
+
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0.35rem 1.25rem;
+    background: #aa8d5e;
+    border-radius: 999px;
+    box-shadow: 0 10px 20px #000000a9;
+
+    color: #000000;
+}
+
+form {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 1.8rem;
+    box-shadow: 0 15px 40px rgba(31, 31, 46, 0.1);
+    text-align: left;
+}
+
+fieldset {
+    border: 1px solid #e1e4f2;
+    border-radius: 5px;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem 1.5rem;
+    background: #fdfdff;
+    position: relative;
+}
+
+.subject-fieldset.is-hidden,
+hr.is-hidden {
+    display: none;
+}
+
+legend {
+    font-weight: 1000;
+    color: #414783;
+    padding: 0 .4rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.2rem;
+}
+
+.remove-btn {
+    position: absolute;
+    top: -5px;
+    right: 4px;
+    border: none;
+    background: transparent;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #d9534f;
+}
+
+.remove-btn:hover {
+    color: #b52b27;
+}
+
+.time-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.time-row label {
+    flex: 1;
+}
+
+input[type="text"],
+select {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid #c9cde6;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+select:focus {
+    border-color: #7a7ff2;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(122, 127, 242, 0.2);
+}
+
+input[type="submit"] {
+    display: block;
+    width: 100%;
+    border: none;
+    background: linear-gradient(120deg, #4d4d4d, #969696);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.85rem 1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+input[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(80, 80, 95, 0.25);
+}
+
+.secondary-btn {
+    width: 100%;
+    border: 1px dashed #000000;
+    border-radius: 12px;
+    padding: 0.7rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    background: rgba(122, 127, 242, 0.08);
+    color: #000000;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+.secondary-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Result page styles */
+.result-page {
+    text-align: center;
+}
+
+.timetable-wrapper {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 15px 40px rgba(31, 31, 46, 0.1);
+    margin-bottom: 2rem;
+    overflow-x: auto;
+}
+
+.timetable-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px solid #000;
+    background: #fff;
+}
+
+.timetable-table th,
+.timetable-table td {
+    border: 1px solid #000;
+    padding: 0;
+    text-align: left;
+    vertical-align: top;
+}
+
+.timetable-table th,
+.timetable-table .time-col {
+    background: #aa8d5e;
+    color: #000;
+    font-weight: 600;
+    text-align: center;
+    padding: 0.75rem;
+}
+
+.timetable-table .time-col {
+    width: 120px;
+}
+
+.time-label {
+    background: #f5f5f5;
+    font-weight: 600;
+    text-align: center;
+    width: 120px;
+    padding: 0.75rem 0.5rem;
+}
+
+.timetable-cell {
+    position: relative;
+    height: 50px;
+    min-height: 50px;
+    padding: 0;
+    vertical-align: top;
+    overflow: visible;
+}
+
+/* Center text in the slot squares */
+.timetable-slot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 0.4rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+.slot-subject,
+.slot-meta,
+.slot-time {
+    text-align: center;
+    width: 100%;
+}
+
+.timetable-slot[data-span="1"] {
+    height: 50px;
+}
+
+.timetable-slot[data-span="2"] {
+    height: 100px;
+}
+
+.timetable-slot[data-span="3"] {
+    height: 150px;
+}
+
+.timetable-slot[data-span="4"] {
+    height: 200px;
+}
+
+.timetable-slot[data-span="5"] {
+    height: 250px;
+}
+
+.timetable-slot[data-span="6"] {
+    height: 300px;
+}
+
+.timetable-slot[data-span="7"] {
+    height: 350px;
+}
+
+.timetable-slot[data-span="8"] {
+    height: 400px;
+}
+
+.timetable-slot-lecture {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    border: 2px solid #5568d3;
+}
+
+.timetable-slot-tutorial {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: #fff;
+    border: 2px solid #e0455f;
+}
+
+.slot-subject {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.slot-meta {
+    font-size: 0.85rem;
+    opacity: 0.95;
+}
+
+.slot-time {
+    font-size: 0.75rem;
+    opacity: 0.9;
+}
+
+.conflicts-block {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 15px 40px rgba(31, 31, 46, 0.1);
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.conflicts-block.has-conflicts h2 {
+    color: #d9534f;
+    margin-top: 0;
+}
+
+.conflicts-block.no-conflicts h2 {
+    color: #5cb85c;
+    margin-top: 0;
+}
+
+.conflicts-block ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.conflicts-block li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e1e4f2;
+}
+
+.conflicts-block li:last-child {
+    border-bottom: none;
+}
+
+.actions-row {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.back-link {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(120deg, #4d4d4d, #969696);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.back-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(80, 80, 95, 0.25);
+}
