@@ -4,8 +4,19 @@
 body {
     font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, sans-serif;
     margin: 0;
-    background: #c3b091;
     color: #000000;
+}
+
+/*BACKGROUND FOR INDEX & RESULT*/
+
+.index-body
+{
+    background: #c3b091;
+}
+
+.result-body
+{
+    background: #c3b091;
 }
 
 .page-wrapper {
@@ -145,6 +156,7 @@ input[type="submit"]:hover {
 }
 
 /* Result page styles */
+
 .result-page {
     text-align: center;
 }
@@ -261,15 +273,15 @@ input[type="submit"]:hover {
 }
 
 .timetable-slot-lecture {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #6c3b1c;
     color: #fff;
-    border: 2px solid #5568d3;
+    border: 2px solid #4e2a14;
 }
 
 .timetable-slot-tutorial {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background: #555507;
     color: #fff;
-    border: 2px solid #e0455f;
+    border: 2px solid #414104;
 }
 
 .slot-subject {
@@ -326,18 +338,21 @@ input[type="submit"]:hover {
     margin-top: 2rem;
 }
 
+
+/*BACK TO FORM BUTTON*/
 .back-link {
     display: inline-block;
     padding: 0.75rem 1.5rem;
-    background: linear-gradient(120deg, #4d4d4d, #969696);
+    background: #aa8d5e;
     color: #fff;
     text-decoration: none;
     border-radius: 12px;
+    border: 2px solid #705e40;
     font-weight: 600;
     transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
 .back-link:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(80, 80, 95, 0.25);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
