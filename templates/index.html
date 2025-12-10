@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">      <!-- for mobile styling-->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>MMU Timetable Checker</title>
 </head>
@@ -38,7 +39,7 @@
             <div class="time-row">
                 <label>Start Time:
                     <select name="start{{i}}">
-                        {% for hour in range(6, 12) %}
+                        {% for hour in range(8, 12) %}
                             {% set option = "%02d:00 AM"|format(hour) %}
                             <option value="{{ option }}" {% if form_data.get('start' ~ i) == option %}selected{% endif %}>{{ "%02d:00AM"|format(hour) }}</option>
                         {% endfor %}
@@ -55,7 +56,7 @@
 
                 <label>End Time:
                     <select name="end{{i}}">
-                        {% for hour in range(6, 12) %}
+                        {% for hour in range(8, 12) %}
                             {% set option = "%02d:00 AM"|format(hour) %}
                             <option value="{{ option }}" {% if form_data.get('end' ~ i) == option %}selected{% endif %}>{{ "%02d:00AM"|format(hour) }}</option>
                         {% endfor %}
@@ -134,5 +135,10 @@
             updateButtonState();
         });
     </script>
+        <div class="github-corner">
+            <a =href="https://github.com/syahmid0h" target="_blank">
+                Github: syahmid0h
+            </a>
+        </div>
 </body>
 </html>
