@@ -52,4 +52,4 @@ def index():
     return render_template("index.html", form_data=saved_form, max_subjects=MAX_SUBJECTS, initial_visible=INITIAL_VISIBLE)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
