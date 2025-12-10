@@ -45,7 +45,7 @@ def find_conflicts(slots):
 # timetable result
 DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
 
-def build_timetable(slots, start_hour=6, end_hour=20):
+def build_timetable(slots, start_hour=8, end_hour=20):
     """
     Build a simple 1-hour granularity timetable grid.
     Each slot is only placed in its starting hour, with span_hours calculated.
