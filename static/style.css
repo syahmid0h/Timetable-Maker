@@ -356,3 +356,73 @@ input[type="submit"]:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
+
+/*Github button*/
+.github-corner
+{
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 999;
+}
+
+.github-corner a
+{
+    font-size: 0.8rem;
+    color: #4d4d4d;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.7); 
+    padding: 5px 10px;
+    border-radius: 8px;
+    border: 1px solid #e1e4f2;
+    transition: all 0.2s ease;
+    font-weight: 600; 
+}
+
+.github-corner a:hover 
+{
+    background: rgba(255, 255, 255, 1);
+    color: #000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+/* for MOBILE devices*/
+@media (max-width: 600px)
+{
+    .page-wrapper 
+    {
+        padding: 1rem 0.5rem 2rem;
+    }
+
+    .time-row 
+    {
+        flex-direction: column; 
+        gap: 0; 
+    }
+
+    h1 
+    {
+        padding: 0.25rem 0.75rem;
+        letter-spacing: 3px;
+        font-size: 1.5rem;
+    }
+
+    form 
+    {
+        padding: 1rem;
+    }
+    
+    /*github button*/
+    .github-corner
+    {
+        top: 5px;
+        right: 5px;
+    }
+
+    .github-corner a
+    {
+        font-size: 0.7rem;
+        padding: 4px 8px;
+    }
+}
